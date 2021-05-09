@@ -11,6 +11,7 @@
 
 
 from tkinter import *
+from tkinter import messagebox as mb
 import ind1module
 
 
@@ -98,15 +99,19 @@ def help_window():
 
 def select_window():
     def choice():
-        choice_en = int(en4.get())
-        res = people.select(choice_en)
-        if res:
-            for idx, person in enumerate(res, 1):
+        try:
+            choice_en = int(en4.get())
+            res = people.select(choice_en)
+            if res:
+                for idx, person in enumerate(res, 1):
+                    text.delete(0.0, END)
+                    text.insert(0.0, '{:>4}: {}'.format(idx, person.name))
+            else:
                 text.delete(0.0, END)
-                text.insert(0.0, '{:>4}: {}'.format(idx, person.name))
-        else:
-            text.delete(0.0, END)
-            text.insert(0.0, 'В этом месяце именинников нема')
+                text.insert(0.0, 'В этом месяце именинников нема')
+        except(ValueError, TypeError):
+            mb.showinfo("Выбор месяца",
+                        "Введите месяц!")
 
     sel_w = Toplevel()
     sel_w.title('Выбрать')
