@@ -16,7 +16,7 @@ root['bg'] = 'white'
 root.title('ЧЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЛ')
 img = PhotoImage(file='chel.png')
 
-bt1 = Button(image=img, command=on_click)
+bt1 = Button(image=img, bg='white', borderwidth=0, activebackground='white', command=on_click)
 bt1.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 root.mainloop()
