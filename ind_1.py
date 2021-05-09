@@ -14,9 +14,6 @@ from tkinter import *
 import ind1module
 
 
-people = ind1module.People()
-
-
 def add_window():
     def add():
         brd = str(en3.get())
@@ -129,6 +126,7 @@ def show():
 
 
 if __name__ == '__main__':
+    people = ind1module.People()
 
     root = Tk()
     root.geometry('800x450')
