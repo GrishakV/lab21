@@ -12,6 +12,7 @@
 
 from tkinter import *
 from tkinter import messagebox as mb
+from tkinter import filedialog as fd
 import ind1module
 
 
@@ -46,37 +47,29 @@ def add_window():
 
 
 def load_window():
-    def load_f():
-        people.load(en4.get())
-        load_w.destroy()
-
-    load_w = Toplevel()
-    load_w.title('Сохранение')
-    load_w.resizable(False, False)
-    load_w.geometry('225x100')
-    lb4 = Label(load_w, text="Введите название файла")
-    en4 = Entry(load_w)
-    bt3 = Button(load_w, text="Загрузить", command=load_f)
-    lb4.pack(padx=2, pady=2)
-    en4.pack(padx=2, pady=2)
-    bt3.pack(padx=2, pady=2)
+    file_name = fd.askopenfilename()
+    try:
+        f = open(file_name)
+        people.load(file_name)
+        f.close()
+    except(FileNotFoundError, TypeError):
+        mb.showinfo("Открытие файла",
+                    "Файл не выбран!")
 
 
 def save_window():
-    def save_f():
-        people.save(en4.get())
-        save_w.destroy()
-
-    save_w = Toplevel()
-    save_w.title('Сохранение')
-    save_w.resizable(False, False)
-    save_w.geometry('225x100')
-    lb4 = Label(save_w, text="Введите название файла")
-    en4 = Entry(save_w)
-    bt3 = Button(save_w, text="Сохранить", command=save_f)
-    lb4.pack(padx=2, pady=2)
-    en4.pack(padx=2, pady=2)
-    bt3.pack(padx=2, pady=2)
+    try:
+        file_name = fd.asksaveasfilename(
+            filetypes=(("TXT files", "*.txt"),
+                       ("XML files", "*.xml"),
+                       ("All files", "*.*")))
+        f = open(file_name, 'w')
+        f.write('')
+        f.close()
+        people.save(file_name)
+    except(FileNotFoundError, TypeError):
+        mb.showinfo("Сохранение файла",
+                    "Файл не выбран!")
 
 
 def help_window():
